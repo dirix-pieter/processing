@@ -2,17 +2,19 @@
 
 
 float xStart, yStart, initialLength, strokeWidth, currentLength;
-Branch starter; 
+Dot starter; 
+
+ArrayList<Dot> dotList = new ArrayList<Dot>();
 
 void setup() {
-  size(1200,1200, P2D);
+  size(1000,1000, P3D);
   xStart = width/2;
   yStart = height/2;
   initialLength = 180;
   currentLength = initialLength;
   strokeWidth = 7;
   stroke(color(80));
-  starter = new Branch(0, 0, initialLength, strokeWidth);
+  
   background(color(240));
   
   for(int i = 0; i <= 3; i++) {
@@ -20,37 +22,51 @@ void setup() {
     pushMatrix();
       translate(xStart, yStart);
       rotate((PI/2) * i);
-      starter.drawBranch();
-      drawFractalTree(starter);
-      currentLength = initialLength;
+      starter = new Dot(0,0, initialLength);
+    starter.drawDot();
+    drawFractalTree(starter);
+    currentLength = initialLength;
     popMatrix();
+    
+    
   }
-  saveFrame("squareFractalTree.jpeg");
+  //saveFrame("squareFractalTree.jpeg");
+  
 }
 
 void draw() {
-
+  //background(color(240));
+  for(int i = 0; i < dotList.size(); i++) {
+    Dot d = dotList.get(i);
+    println(d.y);
+  }
+  
+  stop();
 } 
-void drawFractalTree(Branch branch) {
+void drawFractalTree(Dot dot) {
   float lAngle = radians(90);
   float rAngle = radians(270);
   float sh = 0.25;
   
+  
   if (currentLength > 50) {
-    drawNewBranch(lAngle,branch,sh);
-    drawNewBranch(rAngle,branch,sh);
+    dotList.add(dot);
+    drawNewDot(lAngle,dot,sh);
+    drawNewDot(rAngle,dot,sh);
   }
 } 
 
-void drawNewBranch(Float angle, Branch branch, float sh) {
+void drawNewDot(Float angle, Dot dot, float sh) {
   pushMatrix();
-     currentLength = branch.l - (branch.l * sh);
-     PVector newPosR = new PVector(branch.x, branch.y - branch.l);
-     translate(newPosR.x, newPosR.y);
+     currentLength = dot.dist - (dot.dist * sh);
+     PVector newPos = new PVector(dot.x, dot.y - dot.dist);
+     
+     translate(newPos.x, newPos.y);
      rotate(angle);
-     Branch rBranch = new Branch(0, 0, currentLength, branch.sw );
-     rBranch.drawBranch();
-     drawFractalTree(rBranch); 
+     Dot nDot = new Dot(0, 0, currentLength);
+   nDot.drawDot();
+   dotList.add(nDot);
+   drawFractalTree(nDot); 
    popMatrix();
-
+   
 }
