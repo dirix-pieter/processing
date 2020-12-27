@@ -11,6 +11,15 @@ class ColorContainer {
     this.b = b;
     this.c = color(h,s,b);
   }
+  
+  ColorContainer (float h) {
+    
+    this.h = h;
+    this.s = h;
+    this.b = h;
+    this.c = color(h);
+  }
+  
 
 
 }
