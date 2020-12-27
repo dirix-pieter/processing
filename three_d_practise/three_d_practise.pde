@@ -1,12 +1,22 @@
 float angle = 0.01;
 float box2Position = 0;
+float cubeSize = 50;
+float speed = 1;
+static float margin = 100;
+static ArrayList<Cube> cubes = new ArrayList<Cube>();
+static final int up = 0;
+static final int right = 1;
+static final int down = 2;
+static final int left = 3;
+static final int endOrStart = 4;
 
-Cube starter;
+
 void setup() {
   size(800, 800, P3D);
+  initCubes();
+  ortho();
   
-  starter = new Cube(100, new PVector(width/2, height/2, 0), 2); 
-  //ortho();
+  
   
 }
 
@@ -15,36 +25,35 @@ void draw() {
   background(0);
   
   stroke(255);
-  strokeWeight(2);
+  strokeWeight(1);
   noFill();
-  
-  starter.updateCube();
-  
-  //pushMatrix();
-  //translate(width/2, height/2, 0);
-  
-  //float x = modelX(0,0,0);
-  //float y = modelY(0,0,0);
-  //float z = modelZ(0,0,0);
-  //rotateY(angle * 2);
+  for (int i = cubes.size() - 1; i >= 0; i--) {
+    
+    cubes.get(i).updateCube();
 
-  //box(100);
-  //popMatrix();
-  
-  
-  //pushMatrix();
+  }
 
-  
-  //translate(x, y + box2Position, z);
-  //rotateY(angle * 2);
-  //box(100);
-  //println(y);
-  //popMatrix();
-  
-  //angle += 0.01;
-  //if(y + box2Position >= height/2 - 100 ) {
-  //  box2Position -= 1;
-  //}
-  
+}
 
+void initCubes() {
+  Cube starter;
+  starter = new Cube(cubeSize, new PVector(width/2, height/2, 0), 0, 2, true); 
+  cubes.add(starter);
+  
+  Cube c = new Cube(cubeSize, starter.realPos, speed, 2, false);
+  c.newD = 0;
+  println(c.newD);
+  cubes.add(c);
+  
+  Cube v = new Cube(cubeSize, starter.realPos, speed, 2, false);
+  v.newD = 1;
+  cubes.add(v);
+  
+  //Cube b = new Cube(cubeSize, starter.realPos, speed, 2, false);
+  //b.newD = 2;
+  //cubes.add(b);
+  
+  //Cube n = new Cube(cubeSize, starter.realPos, speed, 2, false);
+  //n.newD = 3;
+  //cubes.add(n);
 }
