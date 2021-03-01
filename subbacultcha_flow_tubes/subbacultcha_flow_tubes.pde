@@ -1,7 +1,7 @@
 
 int col, row;
-int scl = 5;
-int p = 100;
+int scl = 20;
+int p = 50;
 
 int padding = 300;
 
@@ -9,7 +9,7 @@ float maxSpeed = 2;
 float mag = 5;
 float lifetime = 70;
 float zOff;
-float zInc = 0.05;
+float zInc = 0.001;
 
 float inc = 0.05;
 ColorContainer startColor;
@@ -31,11 +31,11 @@ void setup() {
   //startColor = new ColorContainer(90, 30, 80);// greenish to dark yellow
   //endColor = new ColorContainer(53, 100, 79.6); 
  
-  //startColor = new ColorContainer(random(255), random(255), random(255));//
-  //endColor = new ColorContainer(random(255), random(255), random(255)); 
+  startColor = new ColorContainer(random(255), random(255), random(255));//
+  endColor = new ColorContainer(random(255), random(255), random(255)); 
   
-  startColor = new ColorContainer(0);//
-  endColor = new ColorContainer(200); 
+  //startColor = new ColorContainer(0);//
+  //endColor = new ColorContainer(200); 
   
   for (int i = 0; i < p; i++) {
     
@@ -53,7 +53,7 @@ void setup() {
 void draw() {
  
   colorMode(RGB);
- // background(0);
+  //background(0);
   //fill(0, 1);
   //rect(0, 0, width, height);
   noFill();

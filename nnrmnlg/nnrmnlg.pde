@@ -11,7 +11,7 @@ void setup() {
  fill(255, 100);
  textAlign(CENTER, CENTER);
  for(int i = 3; i>=0; i--) {
-   text("nnrmngl",width/2 - 40 + i*20,height/2 + 20 - i*20);
+   text("nnrmnlg",width/2 - 40 + i*20,height/2 + 20 - i*20);
  }
  saveFrame("logo.jpeg");
 }

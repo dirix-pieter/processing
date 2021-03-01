@@ -7,7 +7,7 @@ class Particle {
   float maxSpeed = 10;
   float lifetime;
   float sL;
-  float strokeWeight = 30;
+  float strokeWeight = 50;
   boolean dead;
   PVector prevPos;
 
